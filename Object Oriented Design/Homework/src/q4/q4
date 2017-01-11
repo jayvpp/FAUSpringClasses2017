@@ -1,0 +1,37 @@
+int x = 0;
+try {
+    Greeter g1 = new Greeter("Alice");
+    Greeter g2 = new Greeter("Alice");
+
+    if (g1.sayHello() != g2.sayHello()) {
+
+    g2 = null;
+
+    }
+    x = 1;
+    System.out.println(g2.sayHello());
+
+    x = 2;
+}
+catch (NullPointerException ex) {
+    x++;
+}
+catch (RuntimeException ex) {
+    x = 4;
+} finally
+{
+    x++;
+}
+
+Explanation:
+X = 3
+In line 1 we create variable x = 1, then we enter the try/catch block *try part*, We create 2 instances of Greeter object passing the String Alice
+this will create 2 separated greeter objects (g1 and g2).  In line 6 we called the method SayHello() on g1 and g2, this will return 2 strings. When we do the s1 != s2 . We are comparing the string
+by references (operator == check that both objects are exactly the same object and not compare the value). This check will return true since both references are different(each reference is pointing
+to different memory location on the stack, even though they both have the same value). In line 8 we will make g2 reference null.
+This will cause issue in the future when we dereference g2 on line 12. In line 11 we do x = 1 and we call println with the value of g2.sayHello, since g2 is a null reference, calling the method will throw Exception.
+De-referencing a null reference will cause NullPointerException so the catch on line 16 will execute incrementing the value of x(this means at line 17 x = 2). The second catch at line 19 will not be executed.
+So we go execute line 21 which correspond to the finally clause, this will increment again the value of x making x = 3.
+At the end of the execution of the program X = 3.
+*Trick*
+Some time the operation == can give the illusion of comparing by value if 2 string literals are declared close enouth and the jvm just do one allocation on the stack for both objects.
