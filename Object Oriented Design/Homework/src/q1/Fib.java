@@ -29,15 +29,15 @@ public class Fib {
      * @return  Returns the nth Fibonacci number using iterative algorithms.
      */
     public int f(int n) {
-        if (n < 0) throw new NumberFormatException("Value of n must be >= 0");
-           
+        
+        if (n < 0) throw new NumberFormatException("Value of n must be >= 0");   
+        if (n == 0) return f0;
+        if (n == 1) return f1; 
+        
         int a = f0;
         int b = f1;
         int fib = 0;
-
-        if (n == 0)     return a;
-        if (n == 1)   return b; 
-         
+        
         for (int i = 2; i <= n; i++) {
             fib = a + b;
             a = b;
@@ -48,7 +48,7 @@ public class Fib {
     }
 
     /**
-     * Recursive solution, O(2^n) which is very bad. Can be improved using memorization
+     * Recursive solution, O(2^n) which is very bad. Can be improved using memorization or other dynamic programming technique
      * @param n Index of Fibonacci number you want to calculate.
      * @return  Returns the nth Fibonacci number using iterative algorithms.
      */
